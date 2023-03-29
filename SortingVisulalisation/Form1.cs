@@ -10,12 +10,19 @@ using System.Windows.Forms;
 
 namespace SortingVisulalisation
 {
+
+    /// <summary>
+    /// To add now: 
+    /// - Thread to execute the sorting algh without freezeing the screen
+    /// - add more algorythms
+    /// - Resizing
+    /// </summary>
     public partial class Form1 : Form
     {
         
         // Number of objs to sort (1 px reqtangles) to display 
         int[] toSortObj;
-        Graphics g; //grafics obj
+        Graphics g; 
 
 
         public Form1()
@@ -63,5 +70,15 @@ namespace SortingVisulalisation
             }
 
         }
+
+        //Perform the sorting algorythm 
+        private void sortButton_Click(object sender, EventArgs e)
+        {
+            var sortObj = new SortEngineBubbleSort();
+            sortObj.DoSorting(toSortObj, g, graphicsPanel.Height);
+
+        }
     }
+
+    
 }

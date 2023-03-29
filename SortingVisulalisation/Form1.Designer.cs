@@ -32,6 +32,7 @@
             this.algorythmComboBox = new System.Windows.Forms.ComboBox();
             this.resetButton = new System.Windows.Forms.Button();
             this.graphicsPanel = new System.Windows.Forms.Panel();
+            this.sortButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // algorythmLabel
@@ -72,11 +73,22 @@
             this.graphicsPanel.Size = new System.Drawing.Size(890, 427);
             this.graphicsPanel.TabIndex = 3;
             // 
+            // sortButton
+            // 
+            this.sortButton.Location = new System.Drawing.Point(391, 32);
+            this.sortButton.Name = "sortButton";
+            this.sortButton.Size = new System.Drawing.Size(75, 23);
+            this.sortButton.TabIndex = 4;
+            this.sortButton.Text = "Sort";
+            this.sortButton.UseVisualStyleBackColor = true;
+            this.sortButton.Click += new System.EventHandler(this.sortButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(925, 528);
+            this.Controls.Add(this.sortButton);
             this.Controls.Add(this.graphicsPanel);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.algorythmComboBox);
@@ -94,5 +106,6 @@
         private System.Windows.Forms.ComboBox algorythmComboBox;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Panel graphicsPanel;
+        private System.Windows.Forms.Button sortButton;
     }
 }
