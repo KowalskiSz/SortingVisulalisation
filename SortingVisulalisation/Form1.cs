@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,7 +14,7 @@ namespace SortingVisulalisation
 
     /// <summary>
     /// To add now: 
-    /// - Thread to execute the sorting algh without freezeing the screen
+    /// 
     /// - add more algorythms
     /// - Resizing
     /// </summary>
@@ -32,7 +33,7 @@ namespace SortingVisulalisation
         }
 
         //Function to generate 
-        private void genetareRandomNumbers(int[] numArray, int s, int maxV)
+        private static void genetareRandomNumbers(int[] numArray, int s, int maxV)
         {
             //init new Random Obj
             Random random = new Random();
@@ -74,8 +75,13 @@ namespace SortingVisulalisation
         //Perform the sorting algorythm 
         private void sortButton_Click(object sender, EventArgs e)
         {
+
+            
+            //New BubblSort instance and new thread 
             var sortObj = new SortEngineBubbleSort();
-            sortObj.DoSorting(toSortObj, g, graphicsPanel.Height);
+            Thread t = new Thread(() => sortObj.DoSorting(toSortObj, g, graphicsPanel.Height));
+
+            t.Start();
 
         }
     }
