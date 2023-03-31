@@ -1,6 +1,6 @@
 ﻿namespace SortingVisulalisation
 {
-    partial class Form1
+    partial class SortForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -33,6 +33,7 @@
             this.resetButton = new System.Windows.Forms.Button();
             this.graphicsPanel = new System.Windows.Forms.Panel();
             this.sortButton = new System.Windows.Forms.Button();
+            this.pauseButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // algorythmLabel
@@ -83,18 +84,29 @@
             this.sortButton.UseVisualStyleBackColor = true;
             this.sortButton.Click += new System.EventHandler(this.sortButton_Click);
             // 
-            // Form1
+            // pauseButton
+            // 
+            this.pauseButton.Location = new System.Drawing.Point(498, 31);
+            this.pauseButton.Name = "pauseButton";
+            this.pauseButton.Size = new System.Drawing.Size(158, 23);
+            this.pauseButton.TabIndex = 5;
+            this.pauseButton.Text = "Pause/Resume";
+            this.pauseButton.UseVisualStyleBackColor = true;
+            this.pauseButton.Click += new System.EventHandler(this.pauseButton_Click);
+            // 
+            // SortForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(925, 528);
+            this.Controls.Add(this.pauseButton);
             this.Controls.Add(this.sortButton);
             this.Controls.Add(this.graphicsPanel);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.algorythmComboBox);
             this.Controls.Add(this.algorythmLabel);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "SortForm";
+            this.Text = "Sort";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,5 +119,6 @@
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Panel graphicsPanel;
         private System.Windows.Forms.Button sortButton;
+        private System.Windows.Forms.Button pauseButton;
     }
 }

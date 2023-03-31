@@ -13,37 +13,29 @@ namespace SortingVisulalisation
         private Graphics g;
         private int maxVal;
 
-        private bool isSorted = false;
 
         //Define two Brush obj
         Brush WhiteBrush = new SolidBrush(Color.White);
         Brush BlackBrush = new SolidBrush(Color.Black); 
 
-
+        public SortEngineBubbleSort(int[] toSortArray, Graphics graphics, int mVal)
+        {
+            arrayToSort = toSortArray;
+            g = graphics;
+            maxVal = mVal;
+        }
         
         //DoSorting method contains the Bubble Sort Algh
-        public void DoSorting(int[] toSortArray, Graphics graphics, int mVal)
+        public void ExecuteStep()
         {
-            arrayToSort = toSortArray; 
-            g = graphics;
-            maxVal = mVal; 
-
-            //main loop (Buble sorting algorythm)
-            while (!isSorted)
+            //Sorting through the array under the condition
+            for(int i = 0; i < arrayToSort.Count() - 1; i++)
             {
-                //Sorting through the array under the condition
-                for(int i = 0; i < arrayToSort.Count() - 1; i++)
+                if (arrayToSort[i] > arrayToSort[i + 1])
                 {
-                    if (arrayToSort[i] > arrayToSort[i + 1])
-                    {
-                        SwapVals(i, i + 1);
-                    }
+                    SwapVals(i, i + 1);
                 }
-                
-                
-                isSorted = IsSortedCheck(); 
             }
-
 
         }
 
@@ -55,19 +47,19 @@ namespace SortingVisulalisation
             arrayToSort[n] = tempVal;
 
             //Upadate the display on the screen
-            //Remove ald valuse for the dispaly and show the black background
+            //Remove old valuse for the dispaly and show the black background
             g.FillRectangle(BlackBrush, a, 0, 1, maxVal);
             g.FillRectangle(BlackBrush, n, 0, 1, maxVal);
 
             //Display the new value as a white reqtangle
-            g.FillRectangle(WhiteBrush, a, arrayToSort[a], 1, maxVal);
-            g.FillRectangle(WhiteBrush, n, arrayToSort[n], 1, maxVal);
+            g.FillRectangle(WhiteBrush, a, maxVal - arrayToSort[a], 1, maxVal);
+            g.FillRectangle(WhiteBrush, n, maxVal - arrayToSort[n], 1, maxVal);
 
 
         }
 
         //Checking of the array is already sorted - if so return true - stop the main loop
-        private bool IsSortedCheck()
+        public bool IsSorted()
         {
             for(int i=0; i < arrayToSort.Count() - 1; i++)
             {
@@ -78,6 +70,14 @@ namespace SortingVisulalisation
 
             }
             return true;
+        }
+
+        public void UpDateDraw()
+        {
+            for(int i=0; i<arrayToSort.Count()-1; i++)
+            {
+                g.FillRectangle(new SolidBrush(Color.White), i, arrayToSort[i], 1, maxVal); 
+            }
         }
     }
 }
