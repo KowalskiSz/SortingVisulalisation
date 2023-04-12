@@ -8,7 +8,6 @@ namespace SortingVisulalisation
 {
     interface ISortingEngine
     {
-        
 
         void ExecuteStep();
 

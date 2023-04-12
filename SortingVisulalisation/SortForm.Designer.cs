@@ -59,7 +59,7 @@
             this.resetButton.Name = "resetButton";
             this.resetButton.Size = new System.Drawing.Size(75, 23);
             this.resetButton.TabIndex = 2;
-            this.resetButton.Text = "Reset";
+            this.resetButton.Text = "Reset/Set";
             this.resetButton.UseVisualStyleBackColor = true;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
@@ -86,6 +86,7 @@
             // 
             // pauseButton
             // 
+            this.pauseButton.Enabled = false;
             this.pauseButton.Location = new System.Drawing.Point(498, 31);
             this.pauseButton.Name = "pauseButton";
             this.pauseButton.Size = new System.Drawing.Size(158, 23);

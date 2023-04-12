@@ -15,7 +15,7 @@ namespace SortingVisulalisation
     /// <summary>
     /// To add now: 
     /// - add more algorythms
-    /// - Resizing
+    /// - add some time mesurement
     /// </summary>
     public partial class SortForm : Form
     {
@@ -56,7 +56,7 @@ namespace SortingVisulalisation
 
         
         //Function to generate random nums to sort
-        private static void genetareRandomNumbers(int[] numArray, int s, int maxV)
+        private static void genetareRandomNumbers(ref int[] numArray, int s, int maxV)
         {
             //init new Random Obj
             Random random = new Random();
@@ -72,12 +72,13 @@ namespace SortingVisulalisation
         //Pausing and resuming the algorythm 
         private void pauseButton_Click(object sender, EventArgs e)
         {
-            if(!isPaused)
+            if(!isPaused && bWorker.IsBusy)
             {
                 isPaused = true;
                 bWorker.CancelAsync(); //Stopping the thread 
+
             }    
-            else
+            else 
             {
                 isPaused = false;
 
@@ -98,10 +99,15 @@ namespace SortingVisulalisation
 
         }
 
-
+        
         //Perform the sorting algorythm 
         private void sortButton_Click(object sender, EventArgs e)
         {
+            //Invoke the restet button click method to fill in the space to sort
+            if(toSortObj == null)
+            {
+                resetButton_Click(null, null);
+            }
             //new instance of the BackgroundWorker class to handle the Threading
             bWorker = new BackgroundWorker();
             bWorker.WorkerSupportsCancellation = true;
@@ -111,6 +117,7 @@ namespace SortingVisulalisation
             bWorker.RunWorkerAsync(argument: algorythmComboBox.SelectedItem);
 
             sortButton.Enabled = false;
+            
         }
 
         
@@ -118,6 +125,9 @@ namespace SortingVisulalisation
         //Reset button function
         private void resetButton_Click(object sender, EventArgs e)
         {
+
+           
+            
             //Creating the display object on the panel
             g = graphicsPanel.CreateGraphics();
 
@@ -131,7 +141,7 @@ namespace SortingVisulalisation
             g.FillRectangle(new SolidBrush(Color.Black), 0, 0, numEntries, maxVal);
 
             //Random numbers fun
-            genetareRandomNumbers(toSortObj, numEntries, maxVal);
+            genetareRandomNumbers(ref toSortObj, numEntries, maxVal);
 
             //Filling the graphics pannel with white 1 px wide rectangles
             for(int i=0; i < numEntries; i++)
@@ -139,10 +149,16 @@ namespace SortingVisulalisation
                 g.FillRectangle(new SolidBrush(Color.White), i, maxVal - toSortObj[i], 1, maxVal);
             }
 
-            sortButton.Enabled = true; 
+            sortButton.Enabled = true;
+            pauseButton.Enabled = true; 
         }
 
         #region BackgroundWorker Settings
+
+        private void bgwCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            MessageBox.Show($"{e.Result}", "Completed", MessageBoxButtons.OK);
+        }
 
         private void bgwDoWork(object sender, DoWorkEventArgs e)
         {
@@ -165,15 +181,21 @@ namespace SortingVisulalisation
                 {
                     se.ExecuteStep(); 
                 }
+
+                //Occures when the sorting is done
+                if(se.IsSorted())
+                {
+                    e.Result = "Sorting has been completed";
+                    MessageBox.Show($"{e.Result}", "Completed", MessageBoxButtons.OK);
+                }
             }
             catch
             {
+               
 
             }
              
         }
-
-
 
         #endregion
 
